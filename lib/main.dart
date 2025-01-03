@@ -34,8 +34,7 @@ void main() async {
   runApp(MyApp());
 }
 
-// lib/controllers/counter_controller.dart
-class CounterController extends GetxController {
+ class CounterController extends GetxController {
   var count = 0.obs;
   var isRunning = false.obs;
   Timer? _timer;
