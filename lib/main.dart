@@ -45,8 +45,8 @@ class CounterController extends GetxController {
     AndroidNotificationDetails(
       'counter_channel',
       'Counter Updates',
-      importance: Importance.max,
-      priority: Priority.high,
+      importance: Importance.max
+     // priority: Priority.high,
     );
     const NotificationDetails platformChannelSpecifics =
     NotificationDetails(android: androidPlatformChannelSpecifics);
@@ -61,7 +61,7 @@ class CounterController extends GetxController {
 
   void startBackgroundTask() {
     if (!isRunning.value) {
-      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      _timer = Timer.periodic(Duration(seconds: 1), (timer) {
         count++;
         showNotification();
       });
@@ -80,7 +80,34 @@ class CounterController extends GetxController {
     Workmanager().cancelAll();
     isRunning.value = false;
   }
-
+//void startBackgroundTask() async {
+//   if (!isRunning.value) {
+//     isRunning.value = true;
+//     _timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
+//       if (count.value < 10 && isRunning.value) {
+//         count.value++;
+//         await showNotification("Count: ${count.value}");
+//       } else {
+//         stopBackgroundTask();
+//       }
+//     });
+//
+//     await Workmanager().registerPeriodicTask(
+//       'counter_task',
+//       'incrementCounter',
+//       frequency: const Duration(minutes: 15),
+//     );
+//   }
+// }
+//
+// void stopBackgroundTask() {
+//   _timer?.cancel();
+//   _timer = null;
+//   count.value = 0;
+//   Workmanager().cancelAll();
+//   showNotification("Stopped count");
+//   isRunning.value = false;
+// }
   @override
   void onClose() {
     _timer?.cancel();
@@ -128,3 +155,4 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+// Rest of the code remains the same...
